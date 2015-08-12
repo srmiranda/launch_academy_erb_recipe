@@ -1,5 +1,4 @@
 # Run the code. Change it so that it looks like the required output.
-
 require 'erb'
 
 recipe = {
@@ -49,4 +48,5 @@ Directions
 ERB
 
 erb = ERB.new(recipe_template)
+binding.pry
 puts erb.result
