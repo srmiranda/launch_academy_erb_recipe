@@ -20,8 +20,6 @@ recipe = {
   ]
 }
 
-recipe_title = "Recipe: #{recipe[:name]}"
-
 class Recipe
   attr_accessor :recipe
 

@@ -22,9 +22,6 @@ recipe = {
   ]
 }
 
-recipe_title = "Recipe: #{recipe[:name]}"
-ingredient_list = recipe[:ingredients].inject("") {|string, item| string + "#{item}\n" }
-
 # def ingredient_list(recipe)
 #   list = ""
 #   recipe[:ingredients].each do |ingredient|
@@ -33,14 +30,21 @@ ingredient_list = recipe[:ingredients].inject("") {|string, item| string + "#{it
 #   list
 # end
 
-def direction_list(recipe)
-    list = ""
-    recipe[:directions].each_with_index do |step, index|
-    list += "#{index + 1}. #{step}\n"
-    list += "\n"
-  end
-  list
-end
+# ingredient_list = recipe[:ingredients].inject("") {|string, item| string + "#{item}\n" }
+
+# def direction_list(recipe)
+#     list = ""
+#     recipe[:directions].each_with_index do |step, index|
+#     list += "#{index + 1}. #{step}\n"
+#     list += "\n"
+#   end
+#   list
+# end
+
+# <%= direction_list(recipe) %>
+
+# <%= ingredient_list %>
+recipe_title = "Recipe: #{recipe[:name]}"
 
 recipe_template = <<-ERB
 
@@ -50,13 +54,15 @@ recipe_template = <<-ERB
 
 Ingredients
 -----------
-
-<%= ingredient_list %>
+<% recipe[:ingredients].each do |ingredient| %>
+<%= ingredient %> <% end %>
 
 Directions
 ----------
+<% counter = 1 %> <% recipe[:directions].each do |direction| %>
+<%= counter %>. <%= direction %> <% counter += 1 %>
+<% end %>
 
-<%= direction_list(recipe) %>
 ERB
 
 erb = ERB.new(recipe_template)
