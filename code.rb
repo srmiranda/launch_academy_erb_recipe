@@ -25,10 +25,21 @@ recipe = {
 recipe_title = "Recipe: #{recipe[:name]}"
 ingredient_list = recipe[:ingredients].inject("") {|string, item| string + "#{item}\n" }
 
-list = ""
-recipe[:directions].each_with_index do |step, index|
-  list += "#{index + 1}. #{step}\n"
-  list += "\n"
+# def ingredient_list(recipe)
+#   list = ""
+#   recipe[:ingredients].each do |ingredient|
+#     list += "#{ingredient}\n"
+#   end
+#   list
+# end
+
+def direction_list(recipe)
+    list = ""
+    recipe[:directions].each_with_index do |step, index|
+    list += "#{index + 1}. #{step}\n"
+    list += "\n"
+  end
+  list
 end
 
 recipe_template = <<-ERB
@@ -41,12 +52,12 @@ Ingredients
 -----------
 
 <%= ingredient_list %>
+
 Directions
 ----------
 
-<%= list %>
+<%= direction_list(recipe) %>
 ERB
 
 erb = ERB.new(recipe_template)
-binding.pry
 puts erb.result
